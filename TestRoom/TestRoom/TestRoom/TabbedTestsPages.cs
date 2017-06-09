@@ -12,10 +12,10 @@ namespace TestRoom
     {
         public TabbedTestsPages()
         {
-            this.Title = "Pages de tests pour robot";
+            this.Title = "Selenium Robot test app";
 
             Children.Add(new TestRoomForm { Title = "Test Room" });
-            //Children.Add(new CheckedForm { Title = "Checked" });
+
             Children.Add(new WebViewPage { Title = "Web view" });
         }
     }

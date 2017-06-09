@@ -10,15 +10,14 @@ namespace TestRoom
 {
     public class TestRoomForm : ContentPage
     {
+        List<Label> labels;
         Label labelBouton;
         Label labelSlider;
         Label labelStepper;
         Label labelSwitch;
-        Label labelDate;
-        Label labelTimePicker;
 
         String value;
-        int clickedNumber = 0;
+        //int clickedNumber = 0;
 
         public TestRoomForm()
         {
@@ -48,21 +47,21 @@ namespace TestRoom
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
-            //labelDate = new Label
-            //{
-            //    Text = value,
-            //    TextColor = Color.Black,
-            //    HorizontalOptions = LayoutOptions.EndAndExpand
-            //};
-            //labelTimePicker = new Label
-            //{
-            //    Text = value,
-            //    TextColor = Color.Black,
-            //    HorizontalOptions = LayoutOptions.EndAndExpand
-            //};
+            labels = new List<Label>();
+            labels.Add(labelBouton);
+            labels.Add(labelSlider);
+            labels.Add(labelStepper);
+            labels.Add(labelSwitch);
 
 
-
+            Button boutonReset = new Button
+            {
+                Text = "Reset",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                FontSize = 12
+            };
+            boutonReset.Clicked += Reset;
 
             Button bouton = new Button {Text = "Click!", FontSize = 12};
             bouton.Clicked += OnButtonClicked;
@@ -92,14 +91,22 @@ namespace TestRoom
             DatePicker datePicker = new DatePicker
             {
                 Format = "D",
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
             //datePicker.DateSelected += date_selected;
             
             TimePicker timePicker = new TimePicker
             {
                 Format = "T",
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+
+            Image image = new Image
+            {
+                Source = ImageSource.FromFile("icon.png"),
+                HorizontalOptions = LayoutOptions.CenterAndExpand
             };
 
 
@@ -110,7 +117,14 @@ namespace TestRoom
                 {
                     Intent = TableIntent.Settings,
                     Root = new TableRoot
-                    {                        
+                    {                    
+                        new TableSection("Reset")
+                        {
+                            new ViewCell
+                            {
+                                View = boutonReset
+                            }
+                        },
                         new TableSection("Form list")
                         {
                             new ViewCell
@@ -190,6 +204,17 @@ namespace TestRoom
                                         //labelTimePicker
                                     }
                                 }
+                            },
+                            new ViewCell
+                            {
+                                View = new StackLayout
+                                {
+                                    Orientation = StackOrientation.Horizontal,
+                                    Children =
+                                    {
+                                        image
+                                    }
+                                }
                             }
                         }
                     }
@@ -217,10 +242,18 @@ namespace TestRoom
             labelSlider.Text = String.Format("value : {0:F1}", e.NewValue);
         }
 
-        void OnButtonClicked(object sender, EventArgs e)
+        private void OnButtonClicked(object sender, EventArgs e)
         {
-            clickedNumber += 1;
-            labelBouton.Text = String.Format("clicked : {0}", clickedNumber);
+            //clickedNumber += 1;
+            labelBouton.Text = String.Format("clicked !");//: {0}", clickedNumber);
+        }
+
+        private void Reset(object sender, EventArgs e)
+        {
+            foreach(var label in labels)
+            {
+                label.Text = "";
+            }
         }
     }
 }

@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content.Res;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace TestRoom.Droid
 {
@@ -21,6 +24,8 @@ namespace TestRoom.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+
         }
     }
 }

@@ -2,6 +2,9 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static TestRoom.WebViewPage;
+using Xamarin.Forms;
+using WorkingWithWebview.Android;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -28,3 +31,16 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+
+[assembly: Dependency(typeof(BaseUrl_Android))]
+namespace WorkingWithWebview.Android
+{
+    public class BaseUrl_Android : IBaseUrl
+    {
+        public string Get()
+        {
+            return "file:///android_asset/";
+        }
+    }
+}
