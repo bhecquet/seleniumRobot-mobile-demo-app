@@ -26,6 +26,12 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision>4c940dfa-581f-4b8d-81f5-1164c2dbf047</CodesignProvision>
+    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
+    <MtouchExtraArgs>
+    </MtouchExtraArgs>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -49,7 +55,16 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
+    <IpaPackageName>TestRoom</IpaPackageName>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <CodesignProvision>4c940dfa-581f-4b8d-81f5-1164c2dbf047</CodesignProvision>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchExtraArgs>
+    </MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -61,6 +76,11 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
+    <IpaPackageName>TestRoom</IpaPackageName>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <CodesignProvision>3d92096c-5336-4364-bc8f-9eb72809f2dc</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -71,13 +91,17 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
-    <CodesignKey>iPhone Developer: Frederic Thoraval (MFW432H23D)</CodesignKey>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>3d92096c-5336-4364-bc8f-9eb72809f2dc</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
     <IpaPackageName>TestRoom</IpaPackageName>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <IpaMetadata>Info.plist</IpaMetadata>
+    <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
     <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <MtouchFastDev>false</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -87,13 +111,21 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>3d92096c-5336-4364-bc8f-9eb72809f2dc</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <IpaMetadata>iTunesMetadata.plist</IpaMetadata>
+    <IpaPackageName>TestRoom</IpaPackageName>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhoneSimulator'">
     <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
     <OutputPath>bin\iPhoneSimulator\Ad-Hoc\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TestRoom.iOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -103,6 +135,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
+    <None Include="iTunesMetadata.plist" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

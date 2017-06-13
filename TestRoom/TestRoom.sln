@@ -101,8 +101,9 @@ Global
 		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhone.ActiveCfg = Release|iPhone
-		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhone.Build.0 = Release|iPhone
+		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhone.ActiveCfg = Debug|iPhone
+		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhone.Build.0 = Debug|iPhone
+		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhone.Deploy.0 = Debug|iPhone
 		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{6E7B50AD-7956-4B29-952B-652DF6F417C8}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection

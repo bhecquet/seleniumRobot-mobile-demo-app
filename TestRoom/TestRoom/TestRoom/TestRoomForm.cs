@@ -19,6 +19,11 @@ namespace TestRoom
         String value;
         //int clickedNumber = 0;
 
+        Slider slider;
+        Switch switcher;
+        DatePicker datePicker;
+        TimePicker timePicker;
+
         public TestRoomForm()
         {
             value = "";
@@ -59,14 +64,22 @@ namespace TestRoom
                 Text = "Reset",
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-                FontSize = 12
+                FontSize = 12,
+                BorderWidth = 3,
+                BorderColor = Color.Black
             };
             boutonReset.Clicked += Reset;
 
-            Button bouton = new Button {Text = "Click!", FontSize = 12};
+            Button bouton = new Button
+            {
+                Text = "Click!",
+                FontSize = 12,
+                BorderWidth = 3,
+                BorderColor = Color.Black
+            };
             bouton.Clicked += OnButtonClicked;
 
-            Slider slider = new Slider
+            slider = new Slider
             {
                 Minimum = 0,
                 Maximum = 100,
@@ -82,31 +95,28 @@ namespace TestRoom
             };
             stepper.ValueChanged += OnStepperValueChanged;
 
-            Switch switcher = new Switch
+            switcher = new Switch
             {
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             switcher.Toggled += switcher_Toggled;
             
-            DatePicker datePicker = new DatePicker
+            datePicker = new DatePicker
             {
                 Format = "D",
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
-            //datePicker.DateSelected += date_selected;
             
-            TimePicker timePicker = new TimePicker
+            timePicker = new TimePicker
             {
                 Format = "T",
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             Image image = new Image
             {
                 Source = ImageSource.FromFile("icon.png"),
-                HorizontalOptions = LayoutOptions.CenterAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
 
@@ -183,12 +193,10 @@ namespace TestRoom
                             {
                                 View = new StackLayout
                                 {
-                                    //Padding = new Thickness(0, 5),
                                     Orientation = StackOrientation.Horizontal,
                                     Children =
                                     {
-                                        datePicker,
-                                        //labelDate
+                                        datePicker
                                     }
                                 }
                             },
@@ -196,12 +204,10 @@ namespace TestRoom
                             {
                                 View = new StackLayout
                                 {
-                                    //Padding = new Thickness(0, 5),
                                     Orientation = StackOrientation.Horizontal,
                                     Children =
                                     {
-                                        timePicker,
-                                        //labelTimePicker
+                                        timePicker
                                     }
                                 }
                             },
@@ -222,11 +228,6 @@ namespace TestRoom
             };
         }
 
-        //private void date_selected(object sender, DateChangedEventArgs e)
-        //{
-        //    labelDate.Text = String.Format("switch {0}", e.NewDate);
-        //}
-
         private void switcher_Toggled(object sender, ToggledEventArgs e)
         {
             labelSwitch.Text = String.Format("switch {0}", e.Value);
@@ -244,12 +245,16 @@ namespace TestRoom
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
-            //clickedNumber += 1;
-            labelBouton.Text = String.Format("clicked !");//: {0}", clickedNumber);
+            labelBouton.Text = String.Format("clicked !");
         }
 
         private void Reset(object sender, EventArgs e)
         {
+            slider.Value = 0;
+            switcher.IsToggled = false;
+            datePicker.Date = DateTime.Now;
+            timePicker.Time = TimeSpan.Zero;
+
             foreach(var label in labels)
             {
                 label.Text = "";
