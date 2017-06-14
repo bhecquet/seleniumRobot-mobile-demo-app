@@ -72,6 +72,7 @@ namespace TestRoom
 
             Button bouton = new Button
             {
+                AutomationId = "BOUTON",
                 Text = "Click!",
                 FontSize = 12,
                 BorderWidth = 3,
