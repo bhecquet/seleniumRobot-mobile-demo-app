@@ -60,7 +60,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="googleSearch.png" />
+    <Content Include="googleSearch.png" />
     <Content Include="icon.png" />
     <Content Include="iframe.html" />
     <EmbeddedResource Include="pageParente.html" />

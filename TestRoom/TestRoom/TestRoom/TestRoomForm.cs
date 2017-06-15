@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -15,14 +16,20 @@ namespace TestRoom
         Label labelSlider;
         Label labelStepper;
         Label labelSwitch;
+        Label labelTap;
+        Label labelPan;
 
         String value;
-        //int clickedNumber = 0;
 
         Slider slider;
         Switch switcher;
         DatePicker datePicker;
         TimePicker timePicker;
+        TapGestureRecognizer tapGestureRecognizer;
+        PanGestureRecognizer panGestureRecognizer;
+        Image imageTap;
+        Image imagePan;
+         
 
         public TestRoomForm()
         {
@@ -52,11 +59,25 @@ namespace TestRoom
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
+            labelTap = new Label
+            {
+                Text = value,
+                TextColor = Color.Black,
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
+            labelPan = new Label
+            {
+                Text = value,
+                TextColor = Color.Black,
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
             labels = new List<Label>();
             labels.Add(labelBouton);
             labels.Add(labelSlider);
             labels.Add(labelStepper);
             labels.Add(labelSwitch);
+            labels.Add(labelTap);
+            labels.Add(labelPan);
 
 
             Button boutonReset = new Button
@@ -65,23 +86,24 @@ namespace TestRoom
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
                 FontSize = 12,
-                BorderWidth = 3,
+                BorderWidth = 1,
                 BorderColor = Color.Black
             };
             boutonReset.Clicked += Reset;
 
             Button bouton = new Button
             {
-                AutomationId = "BOUTON",
+                AutomationId = "button",
                 Text = "Click!",
                 FontSize = 12,
-                BorderWidth = 3,
+                BorderWidth = 1,
                 BorderColor = Color.Black
             };
             bouton.Clicked += OnButtonClicked;
 
             slider = new Slider
             {
+                AutomationId = "slider",
                 Minimum = 0,
                 Maximum = 100,
                 HorizontalOptions = LayoutOptions.FillAndExpand
@@ -90,6 +112,7 @@ namespace TestRoom
 
             Stepper stepper = new Stepper
             {
+                AutomationId = "stepper",
                 Minimum = 0,
                 Maximum = 10,
                 Increment = 0.1,
@@ -98,27 +121,53 @@ namespace TestRoom
 
             switcher = new Switch
             {
+                AutomationId = "switcher",
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             switcher.Toggled += switcher_Toggled;
             
             datePicker = new DatePicker
             {
+                AutomationId = "datePicker",
                 Format = "D",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
             
             timePicker = new TimePicker
             {
+                AutomationId = "timePicker",
                 Format = "T",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
-            Image image = new Image
+            imageTap = new Image
             {
+                AutomationId = "imageTap",
                 Source = ImageSource.FromFile("icon.png"),
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.StartAndExpand
             };
+            tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += gesture_tapped; 
+            imageTap.GestureRecognizers.Add(tapGestureRecognizer);
+
+            imagePan = new Image
+            {
+                AutomationId = "imagePan",
+                Source = ImageSource.FromFile("icon.png"),
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                IsVisible = true
+            };
+            panGestureRecognizer = new PanGestureRecognizer();
+            panGestureRecognizer.PanUpdated += onPanUpdated;
+            imagePan.GestureRecognizers.Add(panGestureRecognizer);
+
+            //image3 = new Image
+            //{
+            //    Source = ImageSource.FromFile("icon.png"),
+            //    HorizontalOptions = LayoutOptions.End,
+            //    IsVisible = false
+            //};
+            //image3.GestureRecognizers.Add(panGestureRecognizer);
 
 
             // Build the page.
@@ -219,7 +268,20 @@ namespace TestRoom
                                     Orientation = StackOrientation.Horizontal,
                                     Children =
                                     {
-                                        image
+                                        imageTap,
+                                        labelTap
+                                    }
+                                }
+                            },
+                            new ViewCell
+                            {
+                                View = new StackLayout
+                                {
+                                    Orientation = StackOrientation.Horizontal,
+                                    Children =
+                                    {
+                                        imagePan,
+                                        labelPan
                                     }
                                 }
                             }
@@ -227,6 +289,17 @@ namespace TestRoom
                     }
                 }
             };
+        }
+
+        private void onPanUpdated(object sender, PanUpdatedEventArgs e)
+        {
+            imagePan.IsVisible = false;
+            labelPan.Text = "Image dragged";
+        }
+
+        private void gesture_tapped(object sender, EventArgs e)
+        {
+            labelTap.Text = String.Format("Tapped");
         }
 
         private void switcher_Toggled(object sender, ToggledEventArgs e)
@@ -255,8 +328,10 @@ namespace TestRoom
             switcher.IsToggled = false;
             datePicker.Date = DateTime.Now;
             timePicker.Time = TimeSpan.Zero;
+            imagePan.IsVisible = true;
+            //image3.IsVisible = false;
 
-            foreach(var label in labels)
+            foreach (var label in labels)
             {
                 label.Text = "";
             }
