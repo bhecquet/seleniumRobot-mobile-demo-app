@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace TestRoom
 {
-    public class TestRoomForm : ContentPage
+    public class FormList : ContentPage
     {
         List<Label> labels;
         Label labelBouton;
@@ -18,6 +18,7 @@ namespace TestRoom
         Label labelSwitch;
         Label labelTap;
         Label labelPan;
+        Label labelPinch;
 
         String value;
 
@@ -27,11 +28,13 @@ namespace TestRoom
         TimePicker timePicker;
         TapGestureRecognizer tapGestureRecognizer;
         PanGestureRecognizer panGestureRecognizer;
+        PinchGestureRecognizer pinchGestureRecognizer;
         Image imageTap;
         Image imagePan;
-         
+        Image imagePinch;
 
-        public TestRoomForm()
+
+        public FormList()
         {
             value = "";
 
@@ -71,6 +74,13 @@ namespace TestRoom
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
+            labelPinch = new Label
+            {
+                Text = value,
+                TextColor = Color.Black,
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
+
             labels = new List<Label>();
             labels.Add(labelBouton);
             labels.Add(labelSlider);
@@ -78,6 +88,7 @@ namespace TestRoom
             labels.Add(labelSwitch);
             labels.Add(labelTap);
             labels.Add(labelPan);
+            labels.Add(labelPinch);
 
 
             Button boutonReset = new Button
@@ -125,14 +136,14 @@ namespace TestRoom
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             switcher.Toggled += switcher_Toggled;
-            
+
             datePicker = new DatePicker
             {
                 AutomationId = "datePicker",
                 Format = "D",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
-            
+
             timePicker = new TimePicker
             {
                 AutomationId = "timePicker",
@@ -147,27 +158,27 @@ namespace TestRoom
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += gesture_tapped; 
+            tapGestureRecognizer.Tapped += gesture_tapped;
             imageTap.GestureRecognizers.Add(tapGestureRecognizer);
 
             imagePan = new Image
             {
                 AutomationId = "imagePan",
                 Source = ImageSource.FromFile("icon.png"),
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                IsVisible = true
+                HorizontalOptions = LayoutOptions.StartAndExpand
             };
             panGestureRecognizer = new PanGestureRecognizer();
             panGestureRecognizer.PanUpdated += onPanUpdated;
             imagePan.GestureRecognizers.Add(panGestureRecognizer);
 
-            //image3 = new Image
-            //{
-            //    Source = ImageSource.FromFile("icon.png"),
-            //    HorizontalOptions = LayoutOptions.End,
-            //    IsVisible = false
-            //};
-            //image3.GestureRecognizers.Add(panGestureRecognizer);
+            imagePinch = new Image
+            {
+                Source = ImageSource.FromFile("iconPlusGrande.png"),
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+            };
+            pinchGestureRecognizer = new PinchGestureRecognizer();
+            pinchGestureRecognizer.PinchUpdated += onPinchUpdated;
+            imagePinch.GestureRecognizers.Add(pinchGestureRecognizer);
 
 
             // Build the page.
@@ -175,9 +186,10 @@ namespace TestRoom
             {
                 Content = new TableView
                 {
+                    HasUnevenRows = true,
                     Intent = TableIntent.Settings,
                     Root = new TableRoot
-                    {                    
+                    {
                         new TableSection("Reset")
                         {
                             new ViewCell
@@ -269,6 +281,7 @@ namespace TestRoom
                                     Children =
                                     {
                                         imageTap,
+                                        new Label { Text = "Tap", HorizontalOptions = LayoutOptions.CenterAndExpand},
                                         labelTap
                                     }
                                 }
@@ -281,19 +294,39 @@ namespace TestRoom
                                     Children =
                                     {
                                         imagePan,
+                                        new Label { Text = "Drag", HorizontalOptions = LayoutOptions.CenterAndExpand},
                                         labelPan
+                                    }
+                                }
+                            },
+                            new ViewCell
+                            {
+                                Height = 300,
+                                View = new StackLayout
+                                {
+                                    Orientation = StackOrientation.Vertical,
+                                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                                    Children =
+                                    {
+                                        new Label { Text = "Pinch", HorizontalOptions = LayoutOptions.StartAndExpand},
+                                        imagePinch,
+                                        labelPinch
                                     }
                                 }
                             }
                         }
                     }
-                }
+                },
             };
+        }
+
+        private void onPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
+        {
+            labelPinch.Text = "Image pinched";
         }
 
         private void onPanUpdated(object sender, PanUpdatedEventArgs e)
         {
-            imagePan.IsVisible = false;
             labelPan.Text = "Image dragged";
         }
 
