@@ -1,10 +1,17 @@
 # seleniumRobot-mobile-demo-app
 
 ### Getting Started : [Official documentation](https://developer.xamarin.com/guides/cross-platform/getting_started/)
+
 ---
+
 ### For iOS development : [Official documentation](https://developer.xamarin.com/guides/ios/getting_started/installation/device_provisioning/)
+
 ##### Generate an IPA : [Official documentation](https://developer.xamarin.com/guides/ios/deployment,_testing,_and_metrics/app_distribution/ipa_support/#Creating_an_IPA)
 It is possible that the .ipa file is not generated into the Release/Ad-Hoc file but in the Debug file.
+
+##### Install the iOS app on simulator
+The directory to install is found on the mac : ```/Users/<user>/Library/Developer/CoreSimulator/Devices/<simulator>/data/Containers/Bundle/Application/<build>/```     
+Take the "App.iOS.app" directory
 
 ---
 ### Generate an APK : [Official documentation](https://developer.xamarin.com/guides/android/deployment,_testing,_and_metrics/publishing_an_application/part_1_-_preparing_an_application_for_release/)
