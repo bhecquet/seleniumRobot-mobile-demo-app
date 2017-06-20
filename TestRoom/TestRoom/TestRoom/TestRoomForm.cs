@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace TestRoom
@@ -19,8 +17,10 @@ namespace TestRoom
         Label labelTap;
         Label labelPan;
         Label labelPinch;
+        Label geoLabel;
 
         String value;
+        String asyncValue;
 
         Slider slider;
         Switch switcher;
@@ -32,11 +32,16 @@ namespace TestRoom
         Image imageTap;
         Image imagePan;
         Image imagePinch;
+        Button geoBouton;
 
 
         public FormList()
         {
             value = "";
+            asyncValue =
+                    "Altitude : 0\n" +
+                    "Latitude : 0\n" +
+                    "Longitude : 0";
 
             labelBouton = new Label
             {
@@ -79,6 +84,13 @@ namespace TestRoom
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
+            };
+            geoLabel = new Label
+            {
+                Text = asyncValue,
+                TextColor = Color.Black,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
 
             labels = new List<Label>();
@@ -179,6 +191,18 @@ namespace TestRoom
             pinchGestureRecognizer = new PinchGestureRecognizer();
             pinchGestureRecognizer.PinchUpdated += onPinchUpdated;
             imagePinch.GestureRecognizers.Add(pinchGestureRecognizer);
+
+            geoBouton = new Button
+            {
+                Text = "Get Geo-position",
+                FontSize = 10,
+                BorderWidth = 1,
+                BorderColor = Color.Black
+            };
+            geoBouton.Clicked += async (object sender, EventArgs e) =>
+            {
+                await getGeoPos();
+            };
 
 
             // Build the page.
@@ -313,11 +337,45 @@ namespace TestRoom
                                         labelPinch
                                     }
                                 }
+                            },
+                            new ViewCell
+                            {
+                                View = new StackLayout
+                                {
+                                    Orientation = StackOrientation.Vertical,
+                                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                                    Children =
+                                    {
+                                        geoBouton,
+                                        geoLabel
+                                    }
+                                }
                             }
                         }
                     }
                 },
             };
+        }
+
+        private async Task getGeoPos()
+        {
+            try { 
+                var locator = CrossGeolocator.Current;
+                locator.AllowsBackgroundUpdates = true;
+                locator.DesiredAccuracy = 500;
+
+                var position = await locator.GetPositionAsync(timeoutMilliseconds: 30000);
+                geoLabel.Text = String.Format(
+                    "Altitude : {0}\n" +
+                    "Latitude : {1}\n" +
+                    "Longitude : {2}", 
+                    position.Altitude, position.Latitude, position.Longitude);
+                Debug.WriteLine(position);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Unable to get location, may need to increase timeout: " + ex);
+            }
         }
 
         private void onPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
@@ -361,8 +419,7 @@ namespace TestRoom
             switcher.IsToggled = false;
             datePicker.Date = DateTime.Now;
             timePicker.Time = TimeSpan.Zero;
-            imagePan.IsVisible = true;
-            //image3.IsVisible = false;
+            geoLabel.Text = asyncValue;
 
             foreach (var label in labels)
             {
