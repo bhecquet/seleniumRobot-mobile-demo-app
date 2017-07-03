@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView1">
+        <TableLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tableLayout1"
+            android:stretchColumns="2">
+            <TableRow
+                android:id="@+id/tableRow1">
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="0"
+                    android:id="@+id/textView1" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView2" />
+                <Button
+                    android:text="Reset"
+                    android:layout_column="2"
+                    android:id="@+id/button_reset"
+                    android:layout_width="43.0dp"
+                    android:layout_marginLeft="65.0dp" />
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+            <TableRow>
+                <Button
+                    android:text="Click!"
+                    android:layout_column="0"
+                    android:id="@+id/button_click"
+                    android:layout_marginRight="57.0dp" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView3" />
+                <CheckedTextView
+                    android:layout_column="2"
+                    android:id="@+id/checkedTextView_click" />
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/tableRow2">
+                <SeekBar
+                    android:layout_column="0"
+                    android:id="@+id/seekBar"
+                    android:layout_marginRight="0.0dp"
+                    android:layout_width="143.0dp" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView4" />
+                <CheckedTextView
+                    android:layout_column="2"
+                    android:id="@+id/checkedTextView_seekBar" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow3">
+                <Switch
+                    android:layout_column="0"
+                    android:id="@+id/button_switch"
+                    android:layout_marginRight="0.0dp" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView5" />
+                <CheckedTextView
+                    android:layout_column="2"
+                    android:id="@+id/checkedTextView_switch" />
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+            <TableRow
+                android:id="@+id/tableRow5">
+                <Button
+                    android:layout_column="0"
+                    android:id="@+id/button_datepicker"
+                    android:text="Date picker"
+                    android:layout_marginRight="57.0dp" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView6" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:id="@+id/textView7" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow4">
+                <CheckedTextView
+                    android:inputType="date"
+                    android:layout_span="3"
+                    android:enabled="false"
+                    android:id="@+id/datePicker" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow5">
+                <Button
+                    android:id="@+id/button_timepicker"
+                    android:text="Time picker"
+                    android:layout_column="0"
+                    android:layout_marginRight="57.0dp" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView8" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:id="@+id/textView9" />
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow6">
+                <CheckedTextView
+                    android:inputType="time"
+                    android:layout_span="3"
+                    android:enabled="false"
+                    android:id="@+id/timePicker" />
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/tableRow8">
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="0"
+                    android:id="@+id/textView10" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:id="@+id/textView11" />
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:id="@+id/textView12" />
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/tableRow7">
+                <TableLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_column="0"
+                    android:id="@+id/tableLayout2"
+                    android:stretchColumns="*"
+                    android:layout_height="162.0dp"
+                    android:shrinkColumns="*">
+                    <TableRow
+                        android:id="@+id/tableRow9"
+                        android:minWidth="25px"
+                        android:minHeight="25px">
+                        <ImageView
+                            android:src="@drawable/icon"
+                            android:layout_column="0"
+                            android:id="@+id/imageTap"
+                            android:layout_height="50.0dp"
+                            android:layout_marginRight="100.0dp"
+                            android:layout_marginLeft="0.0dp" />
+                    </TableRow>
+                    <TableRow
+                        android:id="@+id/tableRow10"
+                        android:minWidth="25px"
+                        android:minHeight="25px">
+                        <ImageView
+                            android:src="@drawable/icon"
+                            android:layout_column="0"
+                            android:id="@+id/imagePan"
+                            android:layout_height="50.0dp" />
+                    </TableRow>
+                    <TableRow
+                        android:id="@+id/tableRow11"
+                        android:minWidth="25px"
+                        android:minHeight="25px">
+                        <ImageView
+                            android:src="@drawable/icon"
+                            android:layout_column="0"
+                            android:id="@+id/imagePinch"
+                            android:layout_height="50.0dp"
+                            android:layout_marginRight="0.0dp"
+                            android:layout_marginLeft="100.0dp" />
+                    </TableRow>
+                </TableLayout>
+                <TextView
+                    android:minWidth="30px"
+                    android:minHeight="30px"
+                    android:layout_column="1"
+                    android:id="@+id/textView13" />
+                <TableLayout
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:id="@+id/tableLayout2"
+                    android:stretchColumns="*"
+                    android:shrinkColumns="*"
+                    android:layout_column="2">
+                    <TableRow
+                        android:id="@+id/tableRow9"
+                        android:minWidth="25px"
+                        android:minHeight="25px">
+                        <CheckedTextView
+                            android:text="Tap"
+                            android:id="@+id/checkedTextView_tap"
+                            android:layout_height="50.0dp" />
+                    </TableRow>
+                    <TableRow
+                        android:id="@+id/tableRow10"
+                        android:minWidth="25px"
+                        android:minHeight="25px">
+                        <CheckedTextView
+                            android:text="pan"
+                            android:id="@+id/checkedTextView_pan"
+                            android:layout_height="50.0dp" />
+                    </TableRow>
+                    <TableRow
+                        android:id="@+id/tableRow11">
+                        <CheckedTextView
+                            android:text="pinch"
+                            android:id="@+id/checkedTextView_pinch"
+                            android:layout_height="50.0dp" />
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+            <TableRow
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/tableRow12">
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#FF909090" />
+            <TableRow
+                android:id="@+id/tableRow13">
+                <android.webkit.WebView
+                    android:layout_span="3"
+                    android:layout_column="0"
+                    android:id="@+id/webView1" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

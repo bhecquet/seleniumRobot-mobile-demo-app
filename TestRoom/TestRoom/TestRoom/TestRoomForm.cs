@@ -45,48 +45,56 @@ namespace TestRoom
 
             labelBouton = new Label
             {
+                AutomationId = "AutomationId_LabelBouton",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelSlider = new Label
             {
+                AutomationId = "AutomationId_LabelSlider",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelStepper = new Label
             {
+                AutomationId = "AutomationId_LabelStepper",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelSwitch = new Label
             {
+                AutomationId = "AutomationId_LabelSwitch",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelTap = new Label
             {
+                AutomationId = "AutomationId_LabelTap",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelPan = new Label
             {
+                AutomationId = "AutomationId_LabelPan",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             labelPinch = new Label
             {
+                AutomationId = "AutomationId_LabelPinch",
                 Text = value,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.EndAndExpand
             };
             geoLabel = new Label
             {
+                AutomationId = "AutomationId_geoLabel",
                 Text = asyncValue,
                 TextColor = Color.Black,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -105,6 +113,7 @@ namespace TestRoom
 
             Button boutonReset = new Button
             {
+                AutomationId = "AutomationId_RESET",
                 Text = "Reset",
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
@@ -116,7 +125,7 @@ namespace TestRoom
 
             Button bouton = new Button
             {
-                AutomationId = "button",
+                AutomationId = "AutomationId_CLICK",
                 Text = "Click!",
                 FontSize = 12,
                 BorderWidth = 1,
@@ -126,7 +135,7 @@ namespace TestRoom
 
             slider = new Slider
             {
-                AutomationId = "slider",
+                AutomationId = "AutomationId_Slider",
                 Minimum = 0,
                 Maximum = 100,
                 HorizontalOptions = LayoutOptions.FillAndExpand
@@ -135,7 +144,7 @@ namespace TestRoom
 
             Stepper stepper = new Stepper
             {
-                AutomationId = "stepper",
+                AutomationId = "AutomationId_Stepper",
                 Minimum = 0,
                 Maximum = 10,
                 Increment = 0.1,
@@ -144,28 +153,28 @@ namespace TestRoom
 
             switcher = new Switch
             {
-                AutomationId = "switcher",
+                AutomationId = "AutomationId_Switch",
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
             switcher.Toggled += switcher_Toggled;
 
             datePicker = new DatePicker
             {
-                AutomationId = "datePicker",
+                AutomationId = "AutomationId_Date-picker",
                 Format = "D",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             timePicker = new TimePicker
             {
-                AutomationId = "timePicker",
+                AutomationId = "AutomationId_Time-picker",
                 Format = "T",
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
             imageTap = new Image
             {
-                AutomationId = "imageTap",
+                AutomationId = "AutomationId_Tap",
                 Source = ImageSource.FromFile("icon.png"),
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
@@ -175,7 +184,7 @@ namespace TestRoom
 
             imagePan = new Image
             {
-                AutomationId = "imagePan",
+                AutomationId = "AutomationId_Drag",
                 Source = ImageSource.FromFile("icon.png"),
                 HorizontalOptions = LayoutOptions.StartAndExpand
             };
@@ -185,6 +194,7 @@ namespace TestRoom
 
             imagePinch = new Image
             {
+                AutomationId = "AutomationId_Pinch",
                 Source = ImageSource.FromFile("iconPlusGrande.png"),
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
             };
@@ -194,6 +204,7 @@ namespace TestRoom
 
             geoBouton = new Button
             {
+                AutomationId = "AutomationId_Geobouton",
                 Text = "Get Geo-position",
                 FontSize = 10,
                 BorderWidth = 1,
@@ -218,7 +229,7 @@ namespace TestRoom
                         {
                             new ViewCell
                             {
-                                View = boutonReset
+                                View = boutonReset,
                             }
                         },
                         new TableSection("Form list")

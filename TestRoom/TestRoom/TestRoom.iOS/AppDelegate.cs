@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace TestRoom.iOS
 {
@@ -24,6 +25,16 @@ namespace TestRoom.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) => {
+                if (null != e.View.StyleId)
+                {
+                    e.NativeView.IsAccessibilityElement = true;
+                    e.NativeView.AccessibilityIdentifier = e.View.AutomationId;
+                    e.NativeView.AccessibilityValue = @"AccessibilityValue";
+
+
+                }
+            };
 
             return base.FinishedLaunching(app, options);
         }
