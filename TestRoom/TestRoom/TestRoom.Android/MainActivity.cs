@@ -18,7 +18,7 @@ using Android.Webkit;
 namespace TestRoom.Droid
 {
     [Activity(Label = "TestRoom", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, View.IOnTouchListener, View.IOnDragListener
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         Button boutonReset;
         Button boutonClick;
@@ -95,6 +95,9 @@ namespace TestRoom.Droid
                 labelDate.Text = "";
                 labelTime.Text = "";
 
+                labelTap.Text = "Tap";
+                labelPan.Text = "Pan";
+                labelPinch.Text = "Pinch";
             };
 
             boutonClick.Click += delegate
@@ -118,39 +121,42 @@ namespace TestRoom.Droid
             boutonDate.Click += DateSelect_OnClick;
 
             boutonTime.Click += (o, e) => ShowDialog(TIME_DIALOG_ID);
-
-            imageTap.SetOnTouchListener(this);
-            imagePan.SetOnDragListener(this);
-            imagePinch.SetOnTouchListener(this);
             
+            imageTap.Touch += ImageTap_Touch;
+            imagePan.Touch += ImagePan_Touch;
+            imagePinch.Touch += ImagePinch_Touch;
+            
+        }
+
+        private void ImagePan_Touch(object sender, View.TouchEventArgs e)
+        {
+            if (e.Event.Action == MotionEventActions.Move)
+            {
+                labelPan.Text = "Image panned !";
+            }
+        }
+
+        private void ImagePinch_Touch(object sender, View.TouchEventArgs e)
+        {
+            ///We just check if there is two finger that taps on the image
+            if (e.Event.Action == MotionEventActions.Pointer2Down)
+            {
+                labelPinch.Text = "Image pinched !";
+            }
+        }
+
+        private void ImageTap_Touch(object sender, View.TouchEventArgs e)
+        {
+            if (e.Event.Action == MotionEventActions.Down)
+            {
+                labelTap.Text = "Image tapped !";
+            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            Console.WriteLine(e.ActionMasked);
-            Console.WriteLine(v.Id);
-            if(v.Id == imageTap.Id)
-            {
-                labelTap.Text = "Image tapped !";
-            }
-            if(v.Id == imagePinch.Id)
-            {
-                labelPinch.Text = "Image pinched !";
-            }
-            return false;
-        }
-
-        public bool OnDrag(View v, DragEvent e)
-        {
-            labelPan.Text = "Image dragged !";
-            return false;
-        }
-
 
         void DateSelect_OnClick(object sender, EventArgs eventArgs)
         {
