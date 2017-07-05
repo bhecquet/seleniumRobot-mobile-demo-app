@@ -1,23 +1,20 @@
 ﻿using System;
 
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Android.Content.Res;
-using System.IO;
-using System.Threading.Tasks;
 using Plugin.Permissions;
+using Xamarin.Forms.Platform.Android;
 using Android.Util;
-using Android.Support.V4.View;
-using Android.Graphics;
 using Android.Webkit;
 
 namespace TestRoom.Droid
 {
-    [Activity(Label = "TestRoom", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Name = "testRoom.android.activity", Label = "TestRoom", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         Button boutonReset;
@@ -51,20 +48,26 @@ namespace TestRoom.Droid
 
             base.OnCreate(bundle);
 
+            //global::Xamarin.Forms.Forms.Init(this, bundle);
+            //LoadApplication(new App());
+
+            // Version 100% Android
+
+
             SetContentView(Resource.Layout.FormList);
 
 
             ///---------------- Gestion de la page ----------------------///
-            boutonReset     = FindViewById<Button>(Resource.Id.button_reset);
+            boutonReset = FindViewById<Button>(Resource.Id.button_reset);
 
-            boutonClick     = FindViewById<Button>(Resource.Id.button_click);
-            boutonDate      = FindViewById<Button>(Resource.Id.button_datepicker);
-            boutonTime      = FindViewById<Button>(Resource.Id.button_timepicker);
-            boutonSwitch    = FindViewById<Switch>(Resource.Id.button_switch);
-            seekbar         = FindViewById<SeekBar>(Resource.Id.seekBar);
-            imageTap        = FindViewById<ImageView>(Resource.Id.imageTap);
-            imagePan        = FindViewById<ImageView>(Resource.Id.imagePan);
-            imagePinch      = FindViewById<ImageView>(Resource.Id.imagePinch);
+            boutonClick = FindViewById<Button>(Resource.Id.button_click);
+            boutonDate = FindViewById<Button>(Resource.Id.button_datepicker);
+            boutonTime = FindViewById<Button>(Resource.Id.button_timepicker);
+            boutonSwitch = FindViewById<Switch>(Resource.Id.button_switch);
+            seekbar = FindViewById<SeekBar>(Resource.Id.seekBar);
+            imageTap = FindViewById<ImageView>(Resource.Id.imageTap);
+            imagePan = FindViewById<ImageView>(Resource.Id.imagePan);
+            imagePinch = FindViewById<ImageView>(Resource.Id.imagePinch);
 
             WebView localWebView = FindViewById<WebView>(Resource.Id.webView1);
             localWebView.Settings.JavaScriptEnabled = true;
@@ -73,13 +76,13 @@ namespace TestRoom.Droid
             localWebView.LoadUrl("file:///android_asset/Content/test.html");
 
             labelClick = FindViewById<TextView>(Resource.Id.checkedTextView_click);
-            labelSeekbar    = FindViewById<TextView>(Resource.Id.checkedTextView_seekBar);
-            labelSwitch     = FindViewById<TextView>(Resource.Id.checkedTextView_switch);
-            labelDate       = FindViewById<TextView>(Resource.Id.datePicker);
-            labelTime       = FindViewById<TextView>(Resource.Id.timePicker);
-            labelTap        = FindViewById<TextView>(Resource.Id.checkedTextView_tap);
-            labelPan        = FindViewById<TextView>(Resource.Id.checkedTextView_pan);
-            labelPinch      = FindViewById<TextView>(Resource.Id.checkedTextView_pinch);
+            labelSeekbar = FindViewById<TextView>(Resource.Id.checkedTextView_seekBar);
+            labelSwitch = FindViewById<TextView>(Resource.Id.checkedTextView_switch);
+            labelDate = FindViewById<TextView>(Resource.Id.datePicker);
+            labelTime = FindViewById<TextView>(Resource.Id.timePicker);
+            labelTap = FindViewById<TextView>(Resource.Id.checkedTextView_tap);
+            labelPan = FindViewById<TextView>(Resource.Id.checkedTextView_pan);
+            labelPinch = FindViewById<TextView>(Resource.Id.checkedTextView_pinch);
 
 
             boutonReset.Click += delegate
@@ -121,12 +124,17 @@ namespace TestRoom.Droid
             boutonDate.Click += DateSelect_OnClick;
 
             boutonTime.Click += (o, e) => ShowDialog(TIME_DIALOG_ID);
-            
+
             imageTap.Touch += ImageTap_Touch;
             imagePan.Touch += ImagePan_Touch;
             imagePinch.Touch += ImagePinch_Touch;
-            
         }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
 
         private void ImagePan_Touch(object sender, View.TouchEventArgs e)
         {
@@ -151,11 +159,6 @@ namespace TestRoom.Droid
             {
                 labelTap.Text = "Image tapped !";
             }
-        }
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
-        {
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         void DateSelect_OnClick(object sender, EventArgs eventArgs)
@@ -225,4 +228,6 @@ namespace TestRoom.Droid
             _dateSelectedHandler(selectedDate);
         }
     }
+
 }
+ 

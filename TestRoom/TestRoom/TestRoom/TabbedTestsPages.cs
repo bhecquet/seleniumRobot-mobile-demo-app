@@ -10,12 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace TestRoom
 {
     class TabbedTestsPages : TabbedPage
-    {
-        //private void InitializeComponent()
-        //{
-        //    this.LoadFromXaml(typeof(TabbedTestsPages));
-        //}
-        
+    {        
         public TabbedTestsPages()
         {
             this.Title = "Selenium Robot test app";
